@@ -91,8 +91,8 @@ DWORD WINAPI ThreadProc(LPVOID lpParameter) {
     }
 
     WORD wSyscall = 0x050f;
-
-    if (wSyscall != *(PWORD) (pNtAllocateVirtualMemory + 18)) {
+    pNtAllocateVirtualMemory += 18;
+    if (wSyscall != *(PWORD) (pNtAllocateVirtualMemory)) {
         fprintf(                                            // we're landing directly
             stderr,                                         // on the `syscall` instruction,
             "[-] no syscall? :(\n"                          // so bypass go brrrr
